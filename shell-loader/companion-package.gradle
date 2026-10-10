@@ -19,11 +19,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 import java.security.MessageDigest
 
-def pkgName = 'termux-x11-nightly'
+def pkgName = 'qos-x11'
 def pkgVersion = (file("$rootDir/lorie/version.gradle").text =~ /version = "([^"]+)"/)[0][1] + '-0'
-def pkgDescription = 'Companion package for termux-x11 app'
-def pkgHomepage = 'https://github.com/termux/termux-x11'
-def pkgMaintainer = 'Twaik Yont @twaik'
+def pkgDescription = 'termux-x11 command for the qos Desktop app'
+def pkgHomepage = 'https://github.com/Maruff/qos-desktop'
+def pkgMaintainer = 'Esan Maruff'
 def pkgDepends = 'xkeyboard-config'
 
 def outputDir = layout.buildDirectory.dir('outputs/companion').get().asFile
@@ -82,6 +82,9 @@ Maintainer: $pkgMaintainer
 Version: $pkgVersion
 Homepage: $pkgHomepage
 Depends: $pkgDepends
+Provides: termux-x11-nightly
+Conflicts: termux-x11-nightly
+Replaces: termux-x11-nightly
 Description: $pkgDescription
 """
         def chmodLoader = "chmod 400 /$prefix/libexec/termux-x11/loader.apk"

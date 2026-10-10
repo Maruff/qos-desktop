@@ -18,6 +18,8 @@ concurrency:
 
 jobs:
   cleanup:
+    # qos: upstream maintenance only.
+    if: github.repository == 'termux/termux-x11'
     runs-on: ubuntu-latest
     steps:
       - name: Delete expired and standalone Dependabot runs

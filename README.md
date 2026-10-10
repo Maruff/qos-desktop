@@ -1,3 +1,23 @@
+# qos Desktop
+
+The X11 desktop display for [qos](https://github.com/Maruff/qos), built from
+[Termux:X11](https://github.com/termux/termux-x11) (GPLv3).
+
+qos Desktop is Termux:X11's `sharedUid` flavour signed with the qos key, so it
+runs as part of qos itself. Its command package is called `qos-x11` instead of
+`termux-x11-nightly`: the package's loader only trusts the key the app was signed
+with, and a different name keeps `pkg upgrade` from replacing it with upstream's.
+
+- Install qos, then qos Desktop, from the [qos F-Droid repository](https://qos.ae)
+  or from the [latest release](https://github.com/Maruff/qos-desktop/releases/latest).
+- In qos, tap **Desktop** in the side drawer. The first time, it installs XFCE and
+  `qos-x11`, then opens the desktop.
+
+A `v*` tag runs `.github/workflows/qos_desktop_release.yml`. Upstream's own
+documentation follows.
+
+---
+
 
 # Termux:X11
 

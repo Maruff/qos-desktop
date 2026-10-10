@@ -36,11 +36,11 @@ android.defaultConfig.buildConfigField "String", "logTag", "\"Termux:X11 loader\
 android.defaultConfig.buildConfigField "int", "SIGNATURE", String.valueOf(Arrays.hashCode(keyStore.getCertificate(signingConfig.keyAlias).getEncoded()))
 android.defaultConfig.buildConfigField "String", "CLASS_ID", "\"com.termux.x11.CmdEntryPoint\""
 android.defaultConfig.buildConfigField "String", "packageNotInstalledErrorText",
-        """\"Termux:X11 application is not found.\\n\" +
-        \"You should choose latest release here: \\n https://github.com/termux/termux-x11/releases/tag/nightly\\n\" +
-        \"After this you should download \\"termux-x11-universal-debug.apk\\" and install it.\\n\""""
+        """\"qos Desktop is not installed.\\n\" +
+        \"You should choose latest release here: \\n https://github.com/Maruff/qos-desktop/releases/latest\\n\" +
+        \"After this you should download \\"qos-desktop.apk\\" and install it.\\n\""""
 android.defaultConfig.buildConfigField "String", "packageSignatureMismatchErrorText",
-        "\"Signature verification of target application $targetApplicationId failed.\\nPlease, reinstall both termux-x11 package and Termux:X11 application from the same source\""
+        "\"Signature verification of target application $targetApplicationId failed.\\nPlease, install qos Desktop and the qos-x11 package from the same qos release\""
 android.defaultConfig.buildConfigField "String", "COMMIT", "\"" + ("git rev-parse HEAD\n".execute().getText().trim() ?: (System.getenv('CURRENT_COMMIT') ?: "NO_COMMIT")) + "\""
 
 apply from: 'companion-package.gradle'
