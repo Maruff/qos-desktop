@@ -57,6 +57,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
+            <!-- qos: the desktop is started from qos, not from here. -->
+            <TextView
+                android:id="@+id/qos_start_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:gravity="center_horizontal"
+                android:text="@string/qos_start_hint"
+                android:textColor="#9CB1AC"
+                android:textSize="15sp" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
