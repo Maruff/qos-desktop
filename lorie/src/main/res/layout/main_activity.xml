@@ -70,6 +70,16 @@
                 android:textColor="#9CB1AC"
                 android:textSize="15sp" />
 
+            <!-- qos: starts the desktop through qos, which shares this app's user. -->
+            <Button
+                android:id="@+id/qos_start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/qos_start_button" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

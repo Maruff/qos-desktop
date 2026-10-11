@@ -7,7 +7,9 @@
     <string name="lorie_app_name">&TERMUX_X11_APP_NAME;</string>
 
     <string name="not_connected">Not connected</string>
-    <string name="qos_start_hint">Start the desktop from qos: open its side drawer (swipe in from the left edge) and tap Desktop.</string>
+    <string name="qos_start_hint">Tap Start the desktop. qos opens and, the first time, sets the desktop up, which takes a few minutes. You can also type qos-desktop in qos.</string>
+    <string name="qos_start_button">Start the desktop</string>
+    <string name="qos_start_failed">Could not reach qos. Open qos and type qos-desktop.</string>
     <string name="preferences_button_text">Preferences</string>
     <string name="help_button_text">Help</string>
     <string name="exit_button_text">Exit</string>

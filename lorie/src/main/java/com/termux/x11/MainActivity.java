@@ -320,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.preferences_button).setOnClickListener((l) -> startActivity(new Intent(this, LoriePreferences.class) {{ setAction(Intent.ACTION_MAIN); }}));
         findViewById(R.id.help_button).setOnClickListener((l) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/termux/termux-x11/blob/master/README.md#running-graphical-applications"))));
         findViewById(R.id.exit_button).setOnClickListener((l) -> finish());
+        findViewById(R.id.qos_start_button).setOnClickListener((l) -> startQosDesktop());
         findViewById(R.id.displays_button).setOnClickListener((l) -> showDisplaysDialog());
 
         LorieView lorieView = findViewById(R.id.lorieView);
@@ -1288,5 +1289,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static class MainActivityTagged extends MainActivity {
+    }
+
+    /**
+     * qos: ask qos to run qos-desktop, which installs XFCE the first time and starts the X server
+     * this activity connects to. qos Desktop shares qos's user, so it may start qos's service.
+     */
+    private void startQosDesktop() {
+        Intent intent = new Intent("com.termux.service_execute",
+            new Uri.Builder().scheme("com.termux.file").path("/data/data/com.termux/files/usr/bin/qos-desktop").build());
+        intent.setClassName("com.termux", "com.termux.app.TermuxService");
+        intent.putExtra("com.termux.execute.session_action", "0"); // a new session, with qos in front
+        intent.putExtra("com.termux.execute.command_label", "qos Desktop");
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                startForegroundService(intent);
+            else
+                startService(intent);
+        } catch (Exception e) {
+            Log.e("MainActivity", "Could not start qos-desktop through qos", e);
+            Toast.makeText(this, R.string.qos_start_failed, Toast.LENGTH_LONG).show();
+        }
     }
 }
