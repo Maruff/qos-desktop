@@ -1292,22 +1292,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * qos: ask qos to run qos-desktop, which installs XFCE the first time and starts the X server
-     * this activity connects to. qos Desktop shares qos's user, so it may start qos's service.
+     * qos: open qos with the request to start the desktop, the same request its Desktop shortcut
+     * sends. This window is in front, so Android lets it open qos's.
      */
     private void startQosDesktop() {
-        Intent intent = new Intent("com.termux.service_execute",
-            new Uri.Builder().scheme("com.termux.file").path("/data/data/com.termux/files/usr/bin/qos-desktop").build());
-        intent.setClassName("com.termux", "com.termux.app.TermuxService");
-        intent.putExtra("com.termux.execute.session_action", "0"); // a new session, with qos in front
-        intent.putExtra("com.termux.execute.command_label", "qos Desktop");
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setClassName("com.termux", "com.termux.app.TermuxActivity");
+        intent.putExtra("com.termux.qos.open", "desktop");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                startForegroundService(intent);
-            else
-                startService(intent);
+            startActivity(intent);
         } catch (Exception e) {
-            Log.e("MainActivity", "Could not start qos-desktop through qos", e);
+            Log.e("MainActivity", "Could not open qos", e);
             Toast.makeText(this, R.string.qos_start_failed, Toast.LENGTH_LONG).show();
         }
     }
