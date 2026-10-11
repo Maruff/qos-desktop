@@ -9,6 +9,8 @@
     <string name="not_connected">Not connected</string>
     <string name="qos_start_hint">Tap Start the desktop. qos opens and, the first time, sets the desktop up, which takes a few minutes. You can also type qos-desktop in qos.</string>
     <string name="qos_start_button">Start the desktop</string>
+    <string name="qos_touch_mode">Touch mode: tap where you want to click</string>
+    <string name="qos_mouse_mode">Mouse mode: drag to move the pointer, tap to click</string>
     <string name="qos_start_failed">Could not reach qos. Open qos and type qos-desktop.</string>
     <string name="preferences_button_text">Preferences</string>
     <string name="help_button_text">Help</string>

@@ -89,6 +89,7 @@ public class ExtraKeysConstants {
             put("PASTE", "⎘"); // U+2398
             put("SCROLL", "⇳"); // U+21F3
             put("PREFERENCES", "⚙"); // U+2699 GEAR not well known but easy to understand
+            put("TOUCH_MODE", "MOUSE"); // qos: switches between touch mode and mouse mode
             put("EXIT", "╳"); // U+2573 BOX DRAWINGS LIGHT DIAGONAL CROSS not well known but easy to understand
             put("MOUSE_HELPER", "\uD83D\uDDB1"); // U+1F5B1 THREE BUTTON MOUSE
             put("STYLUS_HELPER", "\uD83D\uDD8C"); // U+1F58C LOWER LEFT PAINTBRUSH

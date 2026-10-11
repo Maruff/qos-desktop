@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import com.termux.x11.extrakeys.*;
 import com.termux.x11.LoriePreferences;
 import com.termux.x11.MainActivity;
+import com.termux.x11.R;
 
 import org.json.JSONException;
 
@@ -38,7 +39,8 @@ public class TermuxX11ExtraKeys implements ExtraKeysView.IExtraKeysView {
     private boolean metaDown;
 
     /** Defines the key for extra keys */
-    public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[['ESC','/',{key: '-', popup: '|'},'HOME','UP',{key: 'END', popup: 'ZOOM_IN'},{key: 'PGUP', popup: 'ZOOM_OUT'},{key: 'KEYBOARD', popup: 'ZOOM_RESET'}], ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','PREFERENCES']]"; // Double row
+    // qos: TOUCH_MODE added, so touch mode and mouse mode are one tap apart.
+    public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[['ESC','/',{key: '-', popup: '|'},'HOME','UP',{key: 'END', popup: 'ZOOM_IN'},{key: 'PGUP', popup: 'ZOOM_OUT'},{key: 'KEYBOARD', popup: 'ZOOM_RESET'}], ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','TOUCH_MODE','PREFERENCES']]"; // Double row
 
     public TermuxX11ExtraKeys(@NonNull View.OnKeyListener eventlistener, MainActivity activity, ExtraKeysView extrakeysview) {
         mEventListener = eventlistener;
@@ -165,10 +167,26 @@ public class TermuxX11ExtraKeys implements ExtraKeysView.IExtraKeysView {
         return false;
     }
 
+    /**
+     * qos: touch mode (Direct touch, "3": tap where the pointer should go) and mouse mode
+     * (Trackpad, "1": drag to move the pointer, tap to click), one tap apart.
+     */
+    private void toggleTouchMode() {
+        boolean toMouse = "3".equals(mActivity.prefs.touchMode.get());
+        mActivity.prefs.touchMode.put(toMouse ? "1" : "3");
+        Intent changed = new Intent("com.termux.x11.ACTION_PREFERENCES_CHANGED");
+        changed.setPackage(mActivity.getPackageName());
+        changed.putExtra("key", "touchMode");
+        mActivity.sendBroadcast(changed);
+        Toast.makeText(mActivity, toMouse ? R.string.qos_mouse_mode : R.string.qos_touch_mode, Toast.LENGTH_SHORT).show();
+    }
+
     @SuppressLint("RtlHardcoded")
     public void onLorieExtraKeyButtonClick(View view, String key, boolean ctrlDown, boolean altDown, boolean shiftDown, boolean metaDown, boolean fnDown) {
         if ("KEYBOARD".equals(key))
             mActivity.toggleKeyboardVisibility();
+        else if ("TOUCH_MODE".equals(key))
+            toggleTouchMode();
         else if ("DRAWER".equals(key) || "PREFERENCES".equals(key))
             mActivity.startActivity(new Intent(mActivity, LoriePreferences.class) {{ setAction(ACTION_START_PREFERENCES_ACTIVITY); }});
         else if ("EXIT".equals(key))
